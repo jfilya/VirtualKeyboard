@@ -1,19 +1,19 @@
 module.exports = {
-  'env': {
-    'browser': true,
-    'es2021': true,
+  env: {
+    browser: true,
+    es2021: true,
   },
-  
-  'extends': [
-    "eslint:recommended", "airbnb"
+
+  extends: [
+    "eslint:recommended", "airbnb",
   ],
-  'parserOptions': {
-    'ecmaVersion': 'latest',
-    'sourceType': 'module',
+  parserOptions: {
+    ecmaVersion: "latest",
+    sourceType: "module",
   },
-  'rules': {
-    "semi": "off",
-    "quotes": ["error", "double"],
-    "linebreak-style": ["error", "windows"]
+  rules: {
+    semi: "off",
+    quotes: ["error", "double"],
+    "linebreak-style": ["error", "windows"],
   },
 };
