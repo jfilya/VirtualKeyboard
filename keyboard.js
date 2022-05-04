@@ -79,12 +79,12 @@ if (localStorage.getItem("lang") === "ru") {
 }
 
 document.onkeydown = (event) => {
-  if (event.code === "AltLeft" || event.code === "AltRight" || event.code === "Tab" || event.code === "MetaLeft") {
+  if (event.code === "AltLeft" || event.code === "AltRight" || event.code === "Tab" || event.code === "MetaLeft" || event.code === "ShiftLeft" || event.code === "ShiftRight") {
     return false;
   }
   return true;
 }
-
+let flag = false;
 document.addEventListener("keydown", (event) => {
   document.querySelector(`.keyboard .btn[data="${event.code}"]`).classList.add("active");
   if (event.code === "ShiftLeft" || event.code === "ShiftRight") {
@@ -117,26 +117,25 @@ document.addEventListener("keydown", (event) => {
     document.querySelector(".keyboard .btn[data=\"CapsLock\"]").classList.toggle("capsActive");
   }
   if (event.code === "ControlLeft") {
-    document.onkeyup = (ev) => {
-      if (ev.code === "AltLeft") {
-        eng.forEach((e) => {
-          e.classList.toggle("none");
-        });
-        ru.forEach((e) => {
-          e.classList.toggle("none");
-        });
-        if (eng[0].classList.contains("none")) {
-          lang = "ru";
-        } else
-        if (ru[0].classList.contains("none")) {
-          lang = "en";
-        }
-        localStorage.setItem("lang", lang);
-      }
-      document.querySelectorAll(".keyboard .btn").forEach((el) => {
-        el.classList.remove("active");
-      })
-    };
+    flag = true;
+  }
+  if (event.code === "AltLeft" && flag) {
+    eng.forEach((e) => {
+      e.classList.toggle("none");
+    });
+    ru.forEach((e) => {
+      e.classList.toggle("none");
+    });
+    if (eng[0].classList.contains("none")) {
+      lang = "ru";
+    } else
+    if (ru[0].classList.contains("none")) {
+      lang = "en";
+    }
+    localStorage.setItem("lang", lang);
+  }
+  if (event.code !== "ControlLeft") {
+    flag = false;
   }
 });
 
