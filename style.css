@@ -63,11 +63,11 @@ textarea:focus{
     width: 100%;
     clear:both;
 }
-[data="Backspace"],[data="Tab"],[data="CapsLock"],[data="Enter"],[data="ShiftRight"],[data="ShiftLeft"] {
+[data="Backspace"],[data="CapsLock"],[data="Enter"],[data="ShiftRight"],[data="ShiftLeft"] {
     width: 100px;
 }
 [data = 'Space']{
-    width: 445px;
+    width: 390px;
 }
 .none{
     display: none;
