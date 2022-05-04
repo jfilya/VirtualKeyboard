@@ -2,18 +2,11 @@ module.exports = {
   env: {
     browser: true,
     es2021: true,
+    node: true,
   },
-
-  extends: [
-    "eslint:recommended", "airbnb",
-  ],
-  parserOptions: {
-    ecmaVersion: "latest",
-    sourceType: "module",
-  },
+  extends: "eslint:recommended",
   rules: {
     semi: "off",
     quotes: ["error", "double"],
-    "linebreak-style": ["error", "windows"],
   },
 };

@@ -31,28 +31,27 @@ textarea:focus{
     background:#050505;
     width: 50px;
     height: 50px;
-    border-radius: 10px;
+    border-radius: 5px;
     display: flex;
     justify-content: center;
     align-items: center;
     cursor:pointer;
     color:#ffffff;
     transition:0.2s;
-    box-shadow: 4px 4px 0px #5a5555;
 }
 .btn:hover{
-    background:#ffffff;
+    background:#7a3dff;
     color:black;
 }
 .btn:active{
     transform: scale(0.9);
-    background:#ffffff;
+    background:#7a3dff;
     color:black;
     box-shadow: 4px 4px 0px #ffffff;
 }
 .active{
     transform: scale(0.9);
-    background:#ffffff;
+    background:#7a3dff;
     color:black;
     box-shadow: 4px 4px 0px #ffffff;
 }
@@ -67,6 +66,15 @@ textarea:focus{
 [data="Backspace"],[data="Tab"],[data="CapsLock"],[data="Enter"],[data="ShiftRight"],[data="ShiftLeft"] {
     width: 100px;
 }
-[data = ' ']{
+[data = 'Space']{
     width: 445px;
+}
+.none{
+    display: none;
+}
+.capsActive{
+    transform: scale(0.9);
+    background:#7a3dff;
+    color:black;
+    box-shadow: 4px 4px 0px #ffffff;
 }
