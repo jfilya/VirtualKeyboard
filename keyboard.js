@@ -68,6 +68,15 @@ const up = document.querySelectorAll(".Up");
 const low = document.querySelectorAll(".low");
 const upShift = document.querySelectorAll(".UpShift");
 const UpShiftCaps = document.querySelectorAll(".UpShiftCaps");
+let lang;
+if (localStorage.getItem("lang") === "ru") {
+  ru.forEach((e) => {
+    e.classList.remove("none");
+  });
+  eng.forEach((e) => {
+    e.classList.add("none");
+  });
+}
 
 document.onkeydown = (event) => {
   document.querySelector(`.keyboard .btn[data="${event.code}"]`).classList.add("active");
@@ -80,6 +89,13 @@ document.onkeydown = (event) => {
         ru.forEach((e) => {
           e.classList.toggle("none");
         });
+        if (eng[0].classList.contains("none")) {
+          lang = "ru";
+        } else
+        if (ru[0].classList.contains("none")) {
+          lang = "en";
+        }
+        localStorage.setItem("lang", lang);
       }
       document.querySelectorAll(".keyboard .btn").forEach((el) => {
         el.classList.remove("active");
