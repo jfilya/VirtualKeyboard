@@ -5,30 +5,29 @@ body{
 .keyboard{
     margin: 0 auto;
     width: 820px;
-    border: 1px solid black;
     padding-bottom: 10px;
-    padding:10px;
-    border-radius: 10px;
+    padding: 30px 10px 10px;
+    border-radius:0 0 10px 10px;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     row-gap:5px;
-    box-shadow: 4px 5px 5px black;
+    background: linear-gradient(118.75deg, #abbec2a1 1.25%, rgba(208, 226, 226, 0.761) 98.34%);
 }
 textarea{
-    width: 820px;
+    width: 810px;
     height: 200px;
-    border-radius: 10px;
+    border-radius: 10px 10px 0px 0px;
     margin-bottom: 30px;
     padding:10px;
-    box-shadow: 4px 5px 5px black;
+    border:5px solid #abbec2a1;
 }
 textarea:focus{
     outline: none;
 }
 .btn{
-    border: 1px solid #000;
-    background:#050505;
+    border: 1px solid #788485;
+    background:#ecf5f4;
     width: 50px;
     height: 50px;
     border-radius: 5px;
@@ -36,27 +35,22 @@ textarea:focus{
     justify-content: center;
     align-items: center;
     cursor:pointer;
-    color:#ffffff;
+    color:#788485;
     transition:0.2s;
 }
 .btn:hover{
-    background:#7a3dff;
+    background:#788485;
     color:black;
 }
 .btn:active{
     transform: scale(0.9);
-    background:#7a3dff;
+    background:#788485;
     color:black;
-    box-shadow: 4px 4px 0px #ffffff;
 }
 .active{
     transform: scale(0.9);
-    background:#7a3dff;
+    background:#788485;
     color:black;
-    box-shadow: 4px 4px 0px #ffffff;
-}
-.upper{
-    text-transform:capitalize;
 }
 .clear{
     display: block;
@@ -74,7 +68,6 @@ textarea:focus{
 }
 .capsActive{
     transform: scale(0.9);
-    background:#7a3dff;
+    background:#788485;
     color:black;
-    box-shadow: 4px 4px 0px #ffffff;
 }
