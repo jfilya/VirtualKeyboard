@@ -79,29 +79,14 @@ if (localStorage.getItem("lang") === "ru") {
 }
 
 document.onkeydown = (event) => {
-  document.querySelector(`.keyboard .btn[data="${event.code}"]`).classList.add("active");
-  if (event.code === "ControlLeft") {
-    document.onkeyup = (ev) => {
-      if (ev.code === "AltLeft") {
-        eng.forEach((e) => {
-          e.classList.toggle("none");
-        });
-        ru.forEach((e) => {
-          e.classList.toggle("none");
-        });
-        if (eng[0].classList.contains("none")) {
-          lang = "ru";
-        } else
-        if (ru[0].classList.contains("none")) {
-          lang = "en";
-        }
-        localStorage.setItem("lang", lang);
-      }
-      document.querySelectorAll(".keyboard .btn").forEach((el) => {
-        el.classList.remove("active");
-      });
-    }
+  if (event.code === "AltLeft" || event.code === "AltRight" || event.code === "Tab" || event.code === "MetaLeft") {
+    return false;
   }
+  return true;
+}
+
+document.addEventListener("keydown", (event) => {
+  document.querySelector(`.keyboard .btn[data="${event.code}"]`).classList.add("active");
   if (event.code === "ShiftLeft" || event.code === "ShiftRight") {
     if (document.querySelector(".keyboard .btn[data=\"CapsLock\"]").classList.contains("capsActive")) {
       UpShiftCaps.forEach((e) => {
@@ -131,17 +116,35 @@ document.onkeydown = (event) => {
     });
     document.querySelector(".keyboard .btn[data=\"CapsLock\"]").classList.toggle("capsActive");
   }
-  if (event.code === "AltLeft" || event.code === "AltRight" || event.code === "Tab" || event.code === "MetaLeft") {
-    return false;
+  if (event.code === "ControlLeft") {
+    document.onkeyup = (ev) => {
+      if (ev.code === "AltLeft") {
+        eng.forEach((e) => {
+          e.classList.toggle("none");
+        });
+        ru.forEach((e) => {
+          e.classList.toggle("none");
+        });
+        if (eng[0].classList.contains("none")) {
+          lang = "ru";
+        } else
+        if (ru[0].classList.contains("none")) {
+          lang = "en";
+        }
+        localStorage.setItem("lang", lang);
+      }
+      document.querySelectorAll(".keyboard .btn").forEach((el) => {
+        el.classList.remove("active");
+      })
+    };
   }
-  return true;
-}
+});
 
-document.onkeyup = (ev) => {
+document.addEventListener("keyup", (event) => {
   document.querySelectorAll(".keyboard .btn").forEach((el) => {
     el.classList.remove("active");
   });
-  if (ev.code === "ShiftLeft" || ev.code === "ShiftRight") {
+  if (event.code === "ShiftLeft" || event.code === "ShiftRight") {
     if (document.querySelector(".keyboard .btn[data=\"CapsLock\"]").classList.contains("capsActive")) {
       UpShiftCaps.forEach((e) => {
         e.classList.toggle("none");
@@ -164,7 +167,7 @@ document.onkeyup = (ev) => {
   document.querySelectorAll(".keyboard .btn").forEach((el) => {
     el.classList.remove("active");
   });
-}
+});
 
 document.querySelectorAll(".keyboard .btn").forEach((event) => {
   event.addEventListener("mousedown", () => {
