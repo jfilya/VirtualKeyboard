@@ -1,22 +1,22 @@
 const bodys = document.querySelector("body");
 const h1 = document.createElement("h1");
-bodys.appendChild(h1);
+bodys.append(h1);
 
 h1.innerHTML = "RSS Keyboard by Julia Filippova";
 const text = document.createElement("textarea")
-bodys.appendChild(text);
+bodys.append(text);
 
 const keyboard = document.createElement("div");
 keyboard.className = "keyboard";
-bodys.appendChild(keyboard);
+bodys.append(keyboard);
 
 const OS = document.createElement("p");
 OS.innerHTML = "THE OPERATING SYSTEM: WINDOWS"
-bodys.appendChild(OS);
+bodys.append(OS);
 
 const press = document.createElement("p");
 press.innerHTML = "Press left Ctrl+ALT to switch language"
-bodys.appendChild(press);
+bodys.append(press);
 
 const KeyboardCode = ["Backquote", "Digit1", "Digit2", "Digit3", "Digit4", "Digit5", "Digit6", "Digit7", "Digit8", "Digit9", "Digit0", "Minus", "Equal", "Backspace", "Tab", "KeyQ", "KeyW", "KeyE", "KeyR", "KeyT", "KeyY", "KeyU", "KeyI", "KeyO", "KeyP", "BracketLeft", "BracketRight", "Backslash", "Delete", "CapsLock", "KeyA", "KeyS", "KeyD", "KeyF", "KeyG", "KeyH", "KeyJ", "KeyK", "KeyL", "Semicolon", "Quote", "Enter", "ShiftLeft", "KeyZ", "KeyX", "KeyC", "KeyV", "KeyB", "KeyN", "KeyM", "Comma", "Period", "Slash", "ArrowUp", "ShiftRight", "ControlLeft", "MetaLeft", "AltLeft", "Space", "AltRight", "ArrowLeft", "ArrowDown", "ArrowRight", "ControlRight"];
 
