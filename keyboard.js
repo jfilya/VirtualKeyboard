@@ -32,6 +32,10 @@ const EngShift = ["`", "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "_", "+
 
 const RusShift = ["Ё", "!", "\"", "№", ";", "%", ":", "?", "*", "(", ")", "_", "+", "Backspace", "Tab", "Й", "Ц", "У", "К", "Е", "Н", "Г", "Ш", "Щ", "З", "Х", "Ъ", "/", "Del", "CapsLock", "Ф", "Ы", "В", "А", "П", "Р", "О", "Л", "Д", "Ж", "Э", "Enter", "Shift", "Я", "Ч", "С", "М", "И", "Т", "Ь", "Б", "Ю", ",", "↑", "Shift", "Ctrl", "Win", "Alt", " ", "Alt", "←", "↓", "→", "Ctrl"];
 
+const EngShiftCaps = ["`", "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "_", "+", "Backspace", "Tab", "q", "w", "e", "r", "t", "y", "u", "i", "o", "p", "[", "]", "\\", "Del", "CapsLock", "a", "s", "d", "f", "g", "h", "j", "k", "l", ";", "'", "Enter", "Shift", "z", "x", "c", "v", "b", "n", "m", "<", ">", "?", "↑", "Shift", "Ctrl", "Win", "Alt", " ", "Alt", "←", "↓", "→", "Ctrl"];
+
+const RusShiftCaps = ["Ё", "!", "\"", "№", ";", "%", ":", "?", "*", "(", ")", "_", "+", "Backspace", "Tab", "й", "ц", "у", "к", "е", "н", "г", "ш", "щ", "з", "х", "ъ", "\\", "Del", "CapsLock", "ф", "ы", "в", "а", "п", "р", "о", "л", "д", "ж", "э", "Enter", "Shift", "я", "ч", "с", "м", "и", "т", "ь", "б", "ю", ",", "↑", "Shift", "Ctrl", "Win", "Alt", " ", "Alt", "←", "↓", "→", "Ctrl"];
+
 const init = () => {
   let out = "";
   for (let i = 0; i < EngLow.length; i += 1) {
@@ -43,11 +47,13 @@ const init = () => {
         <span class="low">${EngLow[i]}</span>
         <span class="Up none">${EngUp[i]}</span>
         <span class="UpShift none">${EngShift[i]}</span>
+        <span class="UpShiftCaps none">${EngShiftCaps[i]}</span>
       </div>
       <div class="Rus none">
         <span class="low">${RusLow[i]}</span>
         <span class="Up none">${RusUp[i]}</span>
         <span class="UpShift none">${RusShift[i]}</span>
+        <span class="UpShiftCaps none">${RusShiftCaps[i]}</span>
       </div>
     </div>`;
     keyboard.innerHTML = out;
@@ -61,10 +67,9 @@ const ru = document.querySelectorAll(".Rus");
 const up = document.querySelectorAll(".Up");
 const low = document.querySelectorAll(".low");
 const upShift = document.querySelectorAll(".UpShift");
+const UpShiftCaps = document.querySelectorAll(".UpShiftCaps");
 
 document.onkeydown = (event) => {
-  console.log(event);
-    console.log(event.lastChild)
   document.querySelector(`.keyboard .btn[data="${event.code}"]`).classList.add("active");
   if (event.code === "ControlLeft") {
     document.onkeyup = (ev) => {
@@ -82,29 +87,23 @@ document.onkeydown = (event) => {
     }
   }
   if (event.code === "ShiftLeft" || event.code === "ShiftRight") {
-    if(document.querySelector(".keyboard .btn[data=\"CapsLock\"]").classList.contains("capsActive")){
-      console.log("caps!!")
-      // rgiore
-    }else {
-      upShift.forEach((e) => {
-      e.classList.remove("none");
+    if (document.querySelector(".keyboard .btn[data=\"CapsLock\"]").classList.contains("capsActive")) {
+      UpShiftCaps.forEach((e) => {
+        e.classList.toggle("none");
       });
-      low.forEach((e) => {
+      upShift.forEach((e) => {
         e.classList.add("none");
       });
-      document.onkeyup = (ev) => {
-        if (ev.code === "ShiftLeft" || ev.code === "ShiftRight") {
-          upShift.forEach((e) => {
-            e.classList.toggle("none");
-          });
-          low.forEach((e) => {
-            e.classList.remove("none");
-          });
-        }
-        document.querySelectorAll(".keyboard .btn").forEach((el) => {
-          el.classList.remove("active");
+      up.forEach((e) => {
+        e.classList.add("none");
       });
-    }
+    } else {
+      upShift.forEach((e) => {
+        e.classList.toggle("none");
+      });
+      low.forEach((e) => {
+        e.classList.toggle("none");
+      });
     }
   }
   if (event.code === "CapsLock") {
@@ -113,7 +112,7 @@ document.onkeydown = (event) => {
     });
     low.forEach((e) => {
       e.classList.toggle("none");
-    }); 
+    });
     document.querySelector(".keyboard .btn[data=\"CapsLock\"]").classList.toggle("capsActive");
   }
   if (event.code === "AltLeft" || event.code === "AltRight" || event.code === "Tab" || event.code === "MetaLeft") {
@@ -122,27 +121,49 @@ document.onkeydown = (event) => {
   return true;
 }
 
-document.onkeyup = () => {
+document.onkeyup = (ev) => {
   document.querySelectorAll(".keyboard .btn").forEach((el) => {
-      el.classList.remove("active");
+    el.classList.remove("active");
+  });
+  if (ev.code === "ShiftLeft" || ev.code === "ShiftRight") {
+    if (document.querySelector(".keyboard .btn[data=\"CapsLock\"]").classList.contains("capsActive")) {
+      UpShiftCaps.forEach((e) => {
+        e.classList.toggle("none");
+      });
+      upShift.forEach((e) => {
+        e.classList.add("none");
+      });
+      up.forEach((e) => {
+        e.classList.remove("none");
+      });
+    } else {
+      upShift.forEach((e) => {
+        e.classList.toggle("none");
+      });
+      low.forEach((e) => {
+        e.classList.toggle("none");
+      });
+    }
+  }
+  document.querySelectorAll(".keyboard .btn").forEach((el) => {
+    el.classList.remove("active");
   });
 }
 
 document.querySelectorAll(".keyboard .btn").forEach((event) => {
-  event.addEventListener("pointerdown", () => {
+  event.addEventListener("mousedown", () => {
     const get = event.getAttribute("data");
     if (get === "ShiftLeft" || get === "ShiftRight") {
-      if(document.querySelector(".keyboard .btn[data=\"CapsLock\"]").classList.contains("capsActive")){
-        console.log("caps!!")
-        // upShift.forEach((e) => {
-        //   e.classList.toggle("none");
-        // });
-        // low.forEach((e) => {
-        //   e.classList.toggle("none");
-        // });
-        // up.forEach((e) => {
-        //   e.classList.remove("none");
-        // });
+      if (document.querySelector(".keyboard .btn[data=\"CapsLock\"]").classList.contains("capsActive")) {
+        UpShiftCaps.forEach((e) => {
+          e.classList.toggle("none");
+        });
+        upShift.forEach((e) => {
+          e.classList.add("none");
+        });
+        up.forEach((e) => {
+          e.classList.add("none");
+        });
       } else {
         upShift.forEach((e) => {
           e.classList.toggle("none");
@@ -162,5 +183,28 @@ document.querySelectorAll(".keyboard .btn").forEach((event) => {
       document.querySelector(".keyboard .btn[data=\"CapsLock\"]").classList.toggle("capsActive");
     }
     return true;
+  })
+  event.addEventListener("mouseup", () => {
+    const get = event.getAttribute("data");
+    if (get === "ShiftLeft" || get === "ShiftRight") {
+      if (document.querySelector(".keyboard .btn[data=\"CapsLock\"]").classList.contains("capsActive")) {
+        UpShiftCaps.forEach((e) => {
+          e.classList.toggle("none");
+        });
+        upShift.forEach((e) => {
+          e.classList.add("none");
+        });
+        up.forEach((e) => {
+          e.classList.remove("none");
+        });
+      } else {
+        upShift.forEach((e) => {
+          e.classList.toggle("none");
+        });
+        low.forEach((e) => {
+          e.classList.toggle("none");
+        });
+      }
+    }
   })
 });

@@ -4,9 +4,10 @@ module.exports = {
     es2021: true,
     node: true,
   },
-  extends: "eslint:recommended",
+  extends: ["airbnb-base"],
   rules: {
     semi: "off",
     quotes: ["error", "double"],
+    "linebreak-style": ["error", "windows"],
   },
 };
