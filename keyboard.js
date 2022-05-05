@@ -139,6 +139,49 @@ document.addEventListener("keydown", (event) => {
   if (event.code !== "ControlLeft") {
     flag = false;
   }
+  const element = (document.querySelector(`.keyboard .btn[data="${event.code}"]`)).getAttribute("data");
+  const note = (document.querySelector(`.keyboard .btn[data="${event.code}"]`));
+  if (element.includes("Key") || element.includes("Digit") || element.includes("Space") || element.includes("Arrow") || element.includes("Backquote") || element.includes("Minus") || element.includes("Equal") || element.includes("Bracket") || element.includes("Backslash") || element.includes("Semicolon") || element.includes("Quote") || element.includes("Comma") || element.includes("Period") || element.includes("Slash")) {
+    if (!eng[0].classList.contains("none")) {
+      if (!low[0].classList.contains("none")) {
+        simbol = note.childNodes[1].childNodes[1].innerHTML
+      }
+      if (!up[0].classList.contains("none")) {
+        simbol = note.childNodes[1].childNodes[3].innerHTML
+      }
+      if (!upShift[0].classList.contains("none")) {
+        simbol = note.childNodes[1].childNodes[5].innerHTML
+      }
+      if (!UpShiftCaps[0].classList.contains("none")) {
+        simbol = note.childNodes[1].childNodes[7].innerHTML
+      }
+    } else
+    if (!ru[0].classList.contains("none")) {
+      if (!low[0].classList.contains("none")) {
+        simbol = note.childNodes[3].childNodes[1].innerHTML
+      }
+      if (!up[0].classList.contains("none")) {
+        simbol = note.childNodes[3].childNodes[3].innerHTML
+      }
+      if (!upShift[0].classList.contains("none")) {
+        simbol = note.childNodes[3].childNodes[5].innerHTML
+      }
+      if (!UpShiftCaps[0].classList.contains("none")) {
+        simbol = note.childNodes[3].childNodes[7].innerHTML
+      }
+    }
+  }
+  array.push(simbol);
+  if (element.includes("Tab")) {
+    array.push("    ");
+  }
+  if (element.includes("Enter")) {
+    array.push("\n");
+  }
+  if (element.includes("Backspace")) {
+    array.splice(array.length - 2, 2);
+  } else simbol = "";
+  text.innerHTML = array.join("");
 });
 
 document.addEventListener("keyup", (event) => {
