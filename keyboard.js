@@ -4,7 +4,6 @@ bodyHtmlFile.append(h1);
 
 h1.innerHTML = "RSS Keyboard by Julia Filippova";
 const text = document.createElement("textarea");
-text.setAttribute("maxlength", "0")
 bodyHtmlFile.append(text);
 
 const keyboard = document.createElement("div");
@@ -62,7 +61,6 @@ const init = () => {
 }
 init();
 
-const array = [];
 const eng = document.querySelectorAll(".Eng");
 const ru = document.querySelectorAll(".Rus");
 const up = document.querySelectorAll(".Up");
@@ -80,13 +78,13 @@ if (localStorage.getItem("lang") === "ru") {
 }
 
 document.onkeydown = (event) => {
-  if (event.code === "AltLeft" || event.code === "AltRight" || event.code === "Tab" || event.code === "MetaLeft" || event.code === "ShiftLeft" || event.code === "ShiftRight") {
+  if (event) {
     return false;
   }
   return true;
 }
 let flag = false;
-let simbol;
+
 document.addEventListener("keydown", (event) => {
   document.querySelector(`.keyboard .btn[data="${event.code}"]`).classList.add("active");
   if (event.code === "ShiftLeft" || event.code === "ShiftRight") {
@@ -144,44 +142,42 @@ document.addEventListener("keydown", (event) => {
   if (element.includes("Key") || element.includes("Digit") || element.includes("Space") || element.includes("Arrow") || element.includes("Backquote") || element.includes("Minus") || element.includes("Equal") || element.includes("Bracket") || element.includes("Backslash") || element.includes("Semicolon") || element.includes("Quote") || element.includes("Comma") || element.includes("Period") || element.includes("Slash")) {
     if (!eng[0].classList.contains("none")) {
       if (!low[0].classList.contains("none")) {
-        simbol = note.childNodes[1].childNodes[1].innerHTML
+        text.textContent += note.childNodes[1].childNodes[1].innerHTML
       }
       if (!up[0].classList.contains("none")) {
-        simbol = note.childNodes[1].childNodes[3].innerHTML
+        text.textContent += note.childNodes[1].childNodes[3].innerHTML
       }
       if (!upShift[0].classList.contains("none")) {
-        simbol = note.childNodes[1].childNodes[5].innerHTML
+        text.textContent += note.childNodes[1].childNodes[5].innerHTML
       }
       if (!UpShiftCaps[0].classList.contains("none")) {
-        simbol = note.childNodes[1].childNodes[7].innerHTML
+        text.textContent += note.childNodes[1].childNodes[7].innerHTML
       }
     } else
     if (!ru[0].classList.contains("none")) {
       if (!low[0].classList.contains("none")) {
-        simbol = note.childNodes[3].childNodes[1].innerHTML
+        text.textContent += note.childNodes[3].childNodes[1].innerHTML
       }
       if (!up[0].classList.contains("none")) {
-        simbol = note.childNodes[3].childNodes[3].innerHTML
+        text.textContent += note.childNodes[3].childNodes[3].innerHTML
       }
       if (!upShift[0].classList.contains("none")) {
-        simbol = note.childNodes[3].childNodes[5].innerHTML
+        text.textContent += note.childNodes[3].childNodes[5].innerHTML
       }
       if (!UpShiftCaps[0].classList.contains("none")) {
-        simbol = note.childNodes[3].childNodes[7].innerHTML
+        text.textContent += note.childNodes[3].childNodes[7].innerHTML;
       }
     }
   }
-  array.push(simbol);
   if (element.includes("Tab")) {
-    array.push("    ");
+    text.textContent += "    ";
   }
   if (element.includes("Enter")) {
-    array.push("\n");
+    text.textContent += "\n";
   }
   if (element.includes("Backspace")) {
-    array.splice(array.length - 2, 2);
-  } else simbol = "";
-  text.innerHTML = array.join("");
+    text.textContent = text.textContent.substring(0, text.textContent.length - 1);
+  }
 });
 
 document.addEventListener("keyup", (event) => {
@@ -248,44 +244,42 @@ document.querySelectorAll(".keyboard .btn").forEach((event) => {
     if (get.includes("Key") || get.includes("Digit") || get.includes("Space") || get.includes("Arrow") || get.includes("Backquote") || get.includes("Minus") || get.includes("Equal") || get.includes("Bracket") || get.includes("Backslash") || get.includes("Semicolon") || get.includes("Quote") || get.includes("Comma") || get.includes("Period") || get.includes("Slash")) {
       if (!eng[0].classList.contains("none")) {
         if (!low[0].classList.contains("none")) {
-          simbol = event.childNodes[1].childNodes[1].innerHTML
+          text.textContent += event.childNodes[1].childNodes[1].innerHTML
         }
         if (!up[0].classList.contains("none")) {
-          simbol = event.childNodes[1].childNodes[3].innerHTML
+          text.textContent += event.childNodes[1].childNodes[3].innerHTML
         }
         if (!upShift[0].classList.contains("none")) {
-          simbol = event.childNodes[1].childNodes[5].innerHTML
+          text.textContent += event.childNodes[1].childNodes[5].innerHTML
         }
         if (!UpShiftCaps[0].classList.contains("none")) {
-          simbol = event.childNodes[1].childNodes[7].innerHTML
+          text.textContent += event.childNodes[1].childNodes[7].innerHTML
         }
       } else
       if (!ru[0].classList.contains("none")) {
         if (!low[0].classList.contains("none")) {
-          simbol = event.childNodes[3].childNodes[1].innerHTML
+          text.textContent += event.childNodes[3].childNodes[1].innerHTML
         }
         if (!up[0].classList.contains("none")) {
-          simbol = event.childNodes[3].childNodes[3].innerHTML
+          text.textContent += event.childNodes[3].childNodes[3].innerHTML
         }
         if (!upShift[0].classList.contains("none")) {
-          simbol = event.childNodes[3].childNodes[5].innerHTML
+          text.textContent += event.childNodes[3].childNodes[5].innerHTML
         }
         if (!UpShiftCaps[0].classList.contains("none")) {
-          simbol = event.childNodes[3].childNodes[7].innerHTML
+          text.textContent += event.childNodes[3].childNodes[7].innerHTML
         }
       }
     }
-    array.push(simbol);
     if (get === "Tab") {
-      array.push("    ");
+      text.textContent += "    ";
     }
     if (get === "Enter") {
-      array.push("\n");
+      text.textContent += "\n";
     }
     if (get === "Backspace") {
-      array.splice(array.length - 2, 2);
-    } else simbol = "";
-    text.innerHTML = array.join("");
+      text.textContent = text.textContent.substring(0, text.textContent.length - 1);
+    }
     return true;
   })
   event.addEventListener("mouseup", () => {
