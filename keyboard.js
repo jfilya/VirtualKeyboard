@@ -143,38 +143,38 @@ document.addEventListener("keydown", (event) => {
   if (element.includes("Key") || element.includes("Digit") || element.includes("Space") || element.includes("Arrow") || element.includes("Backquote") || element.includes("Minus") || element.includes("Equal") || element.includes("Bracket") || element.includes("Backslash") || element.includes("Semicolon") || element.includes("Quote") || element.includes("Comma") || element.includes("Period") || element.includes("Slash")) {
     if (!eng[0].classList.contains("none")) {
       if (!low[0].classList.contains("none")) {
-        text.value += note.childNodes[1].childNodes[1].innerHTML
+        text.setRangeText(note.childNodes[1].childNodes[1].innerHTML, text.selectionStart, text.selectionEnd, "end");
       }
       if (!up[0].classList.contains("none")) {
-        text.value += note.childNodes[1].childNodes[3].innerHTML
+        text.setRangeText(note.childNodes[1].childNodes[3].innerHTML, text.selectionStart, text.selectionEnd, "end");
       }
       if (!upShift[0].classList.contains("none")) {
-        text.value += note.childNodes[1].childNodes[5].innerHTML
+        text.setRangeText(note.childNodes[1].childNodes[5].innerHTML, text.selectionStart, text.selectionEnd, "end");
       }
       if (!UpShiftCaps[0].classList.contains("none")) {
-        text.value += note.childNodes[1].childNodes[7].innerHTML
+        text.setRangeText(note.childNodes[1].childNodes[7].innerHTML, text.selectionStart, text.selectionEnd, "end");
       }
     } else
     if (!ru[0].classList.contains("none")) {
       if (!low[0].classList.contains("none")) {
-        text.value += note.childNodes[3].childNodes[1].innerHTML
+        text.setRangeText(note.childNodes[3].childNodes[1].innerHTML, text.selectionStart, text.selectionEnd, "end");
       }
       if (!up[0].classList.contains("none")) {
-        text.value += note.childNodes[3].childNodes[3].innerHTML
+        text.setRangeText(note.childNodes[3].childNodes[3].innerHTML, text.selectionStart, text.selectionEnd, "end");
       }
       if (!upShift[0].classList.contains("none")) {
-        text.value += note.childNodes[3].childNodes[5].innerHTML
+        text.setRangeText(note.childNodes[3].childNodes[5].innerHTML, text.selectionStart, text.selectionEnd, "end");
       }
       if (!UpShiftCaps[0].classList.contains("none")) {
-        text.value += note.childNodes[3].childNodes[7].innerHTML;
+        text.setRangeText(note.childNodes[3].childNodes[7].innerHTML, text.selectionStart, text.selectionEnd, "end");
       }
     }
   }
   if (element.includes("Tab")) {
-    text.value += "    ";
+    text.setRangeText("    ", text.selectionStart, text.selectionEnd, "end");
   }
   if (element.includes("Enter")) {
-    text.value += "\n";
+    text.setRangeText("\n", text.selectionStart, text.selectionEnd, "end");
   }
 });
 
@@ -242,41 +242,48 @@ document.querySelectorAll(".keyboard .btn").forEach((event) => {
     if (get.includes("Key") || get.includes("Digit") || get.includes("Space") || get.includes("Arrow") || get.includes("Backquote") || get.includes("Minus") || get.includes("Equal") || get.includes("Bracket") || get.includes("Backslash") || get.includes("Semicolon") || get.includes("Quote") || get.includes("Comma") || get.includes("Period") || get.includes("Slash")) {
       if (!eng[0].classList.contains("none")) {
         if (!low[0].classList.contains("none")) {
-          text.value += event.childNodes[1].childNodes[1].innerHTML
+          text.setRangeText(event.childNodes[1].childNodes[1].innerHTML, text.selectionStart, text.selectionEnd, "end");
         }
         if (!up[0].classList.contains("none")) {
-          text.value += event.childNodes[1].childNodes[3].innerHTML
+          text.setRangeText(event.childNodes[1].childNodes[3].innerHTMLL, text.selectionStart, text.selectionEnd, "end");
         }
         if (!upShift[0].classList.contains("none")) {
-          text.value += event.childNodes[1].childNodes[5].innerHTML
+          text.setRangeText(event.childNodes[1].childNodes[5].innerHTMLL, text.selectionStart, text.selectionEnd, "end");
         }
         if (!UpShiftCaps[0].classList.contains("none")) {
-          text.value += event.childNodes[1].childNodes[7].innerHTML
+          text.setRangeText(event.childNodes[1].childNodes[7].innerHTMLL, text.selectionStart, text.selectionEnd, "end");
         }
       } else
       if (!ru[0].classList.contains("none")) {
         if (!low[0].classList.contains("none")) {
-          text.value += event.childNodes[3].childNodes[1].innerHTML
+          text.setRangeText(event.childNodes[3].childNodes[1].innerHTML, text.selectionStart, text.selectionEnd, "end");
         }
         if (!up[0].classList.contains("none")) {
-          text.textContent += event.childNodes[3].childNodes[3].innerHTML
+          text.setRangeText(event.childNodes[3].childNodes[3].innerHTML, text.selectionStart, text.selectionEnd, "end");
         }
         if (!upShift[0].classList.contains("none")) {
-          text.value += event.childNodes[3].childNodes[5].innerHTML
+          text.setRangeText(event.childNodes[3].childNodes[5].innerHTML, text.selectionStart, text.selectionEnd, "end");
         }
         if (!UpShiftCaps[0].classList.contains("none")) {
-          text.value += event.childNodes[3].childNodes[7].innerHTML
+          text.setRangeText(event.childNodes[3].childNodes[7].innerHTML, text.selectionStart, text.selectionEnd, "end");
         }
       }
     }
     if (get === "Tab") {
-      text.value += "    ";
+      text.setRangeText("    ", text.selectionStart, text.selectionEnd, "end");
     }
     if (get === "Enter") {
-      text.value += "\n";
+      text.setRangeText("\n", text.selectionStart, text.selectionEnd, "end");
     }
     if (get === "Backspace") {
-      text.value = text.value.substring(0, text.textContent.length - 1);
+      if (text.selectionStart === text.selectionEnd) {
+        text.setRangeText("", text.selectionStart - 1, text.selectionEnd);
+      } else {
+        text.setRangeText("", text.selectionStart, text.selectionEnd);
+      }
+    }
+    if (get === "Delete") {
+      text.setRangeText("", text.selectionStart, text.selectionEnd + 1);
     }
     return true;
   })
