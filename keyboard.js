@@ -36,13 +36,13 @@ const EngShiftCaps = ["`", "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "_"
 
 const RusShiftCaps = ["Ё", "!", "\"", "№", ";", "%", ":", "?", "*", "(", ")", "_", "+", "Backspace", "Tab", "й", "ц", "у", "к", "е", "н", "г", "ш", "щ", "з", "х", "ъ", "\\", "Del", "CapsLock", "ф", "ы", "в", "а", "п", "р", "о", "л", "д", "ж", "э", "Enter", "Shift", "я", "ч", "с", "м", "и", "т", "ь", "б", "ю", ",", "↑", "Shift", "Ctrl", "Win", "Alt", " ", "Alt", "←", "↓", "→", "Ctrl"];
 
-const init = () => {
-  let out = "";
+const filling = () => {
+  let block = "";
   for (let i = 0; i < EngLow.length; i += 1) {
     if (i === 14 || i === 29 || i === 42 || i === 55) {
-      out += "<div class='clear'></div>";
+      block += "<div class='clear'></div>";
     }
-    out += `<div class ='btn ${KeyboardCode[i]}' data="${KeyboardCode[i]}">
+    block += `<div class ='btn ${KeyboardCode[i]}' data="${KeyboardCode[i]}">
       <div class="Eng">
         <span class="low">${EngLow[i]}</span>
         <span class="Up none">${EngUp[i]}</span>
@@ -56,10 +56,10 @@ const init = () => {
         <span class="UpShiftCaps none">${RusShiftCaps[i]}</span>
       </div>
     </div>`;
-    keyboard.innerHTML = out;
+    keyboard.innerHTML = block;
   }
 }
-init();
+filling();
 
 const eng = document.querySelectorAll(".Eng");
 const ru = document.querySelectorAll(".Rus");
@@ -78,14 +78,15 @@ if (localStorage.getItem("lang") === "ru") {
 }
 
 document.onkeydown = (event) => {
-  if (event) {
-    return false;
+  if (event.code === "Delete" || event.code === "Backspace") {
+    return true;
   }
-  return true;
+  return false;
 }
 let flag = false;
 
 document.addEventListener("keydown", (event) => {
+  text.focus();
   document.querySelector(`.keyboard .btn[data="${event.code}"]`).classList.add("active");
   if (event.code === "ShiftLeft" || event.code === "ShiftRight") {
     if (document.querySelector(".keyboard .btn[data=\"CapsLock\"]").classList.contains("capsActive")) {
@@ -142,41 +143,38 @@ document.addEventListener("keydown", (event) => {
   if (element.includes("Key") || element.includes("Digit") || element.includes("Space") || element.includes("Arrow") || element.includes("Backquote") || element.includes("Minus") || element.includes("Equal") || element.includes("Bracket") || element.includes("Backslash") || element.includes("Semicolon") || element.includes("Quote") || element.includes("Comma") || element.includes("Period") || element.includes("Slash")) {
     if (!eng[0].classList.contains("none")) {
       if (!low[0].classList.contains("none")) {
-        text.textContent += note.childNodes[1].childNodes[1].innerHTML
+        text.value += note.childNodes[1].childNodes[1].innerHTML
       }
       if (!up[0].classList.contains("none")) {
-        text.textContent += note.childNodes[1].childNodes[3].innerHTML
+        text.value += note.childNodes[1].childNodes[3].innerHTML
       }
       if (!upShift[0].classList.contains("none")) {
-        text.textContent += note.childNodes[1].childNodes[5].innerHTML
+        text.value += note.childNodes[1].childNodes[5].innerHTML
       }
       if (!UpShiftCaps[0].classList.contains("none")) {
-        text.textContent += note.childNodes[1].childNodes[7].innerHTML
+        text.value += note.childNodes[1].childNodes[7].innerHTML
       }
     } else
     if (!ru[0].classList.contains("none")) {
       if (!low[0].classList.contains("none")) {
-        text.textContent += note.childNodes[3].childNodes[1].innerHTML
+        text.value += note.childNodes[3].childNodes[1].innerHTML
       }
       if (!up[0].classList.contains("none")) {
-        text.textContent += note.childNodes[3].childNodes[3].innerHTML
+        text.value += note.childNodes[3].childNodes[3].innerHTML
       }
       if (!upShift[0].classList.contains("none")) {
-        text.textContent += note.childNodes[3].childNodes[5].innerHTML
+        text.value += note.childNodes[3].childNodes[5].innerHTML
       }
       if (!UpShiftCaps[0].classList.contains("none")) {
-        text.textContent += note.childNodes[3].childNodes[7].innerHTML;
+        text.value += note.childNodes[3].childNodes[7].innerHTML;
       }
     }
   }
   if (element.includes("Tab")) {
-    text.textContent += "    ";
+    text.value += "    ";
   }
   if (element.includes("Enter")) {
-    text.textContent += "\n";
-  }
-  if (element.includes("Backspace")) {
-    text.textContent = text.textContent.substring(0, text.textContent.length - 1);
+    text.value += "\n";
   }
 });
 
@@ -244,45 +242,46 @@ document.querySelectorAll(".keyboard .btn").forEach((event) => {
     if (get.includes("Key") || get.includes("Digit") || get.includes("Space") || get.includes("Arrow") || get.includes("Backquote") || get.includes("Minus") || get.includes("Equal") || get.includes("Bracket") || get.includes("Backslash") || get.includes("Semicolon") || get.includes("Quote") || get.includes("Comma") || get.includes("Period") || get.includes("Slash")) {
       if (!eng[0].classList.contains("none")) {
         if (!low[0].classList.contains("none")) {
-          text.textContent += event.childNodes[1].childNodes[1].innerHTML
+          text.value += event.childNodes[1].childNodes[1].innerHTML
         }
         if (!up[0].classList.contains("none")) {
-          text.textContent += event.childNodes[1].childNodes[3].innerHTML
+          text.value += event.childNodes[1].childNodes[3].innerHTML
         }
         if (!upShift[0].classList.contains("none")) {
-          text.textContent += event.childNodes[1].childNodes[5].innerHTML
+          text.value += event.childNodes[1].childNodes[5].innerHTML
         }
         if (!UpShiftCaps[0].classList.contains("none")) {
-          text.textContent += event.childNodes[1].childNodes[7].innerHTML
+          text.value += event.childNodes[1].childNodes[7].innerHTML
         }
       } else
       if (!ru[0].classList.contains("none")) {
         if (!low[0].classList.contains("none")) {
-          text.textContent += event.childNodes[3].childNodes[1].innerHTML
+          text.value += event.childNodes[3].childNodes[1].innerHTML
         }
         if (!up[0].classList.contains("none")) {
           text.textContent += event.childNodes[3].childNodes[3].innerHTML
         }
         if (!upShift[0].classList.contains("none")) {
-          text.textContent += event.childNodes[3].childNodes[5].innerHTML
+          text.value += event.childNodes[3].childNodes[5].innerHTML
         }
         if (!UpShiftCaps[0].classList.contains("none")) {
-          text.textContent += event.childNodes[3].childNodes[7].innerHTML
+          text.value += event.childNodes[3].childNodes[7].innerHTML
         }
       }
     }
     if (get === "Tab") {
-      text.textContent += "    ";
+      text.value += "    ";
     }
     if (get === "Enter") {
-      text.textContent += "\n";
+      text.value += "\n";
     }
     if (get === "Backspace") {
-      text.textContent = text.textContent.substring(0, text.textContent.length - 1);
+      text.value = text.value.substring(0, text.textContent.length - 1);
     }
     return true;
   })
   event.addEventListener("mouseup", () => {
+    text.focus();
     const get = event.getAttribute("data");
     if (get === "ShiftLeft" || get === "ShiftRight") {
       if (document.querySelector(".keyboard .btn[data=\"CapsLock\"]").classList.contains("capsActive")) {
