@@ -245,13 +245,13 @@ document.querySelectorAll(".keyboard .btn").forEach((event) => {
           text.setRangeText(event.childNodes[1].childNodes[1].innerHTML, text.selectionStart, text.selectionEnd, "end");
         }
         if (!up[0].classList.contains("none")) {
-          text.setRangeText(event.childNodes[1].childNodes[3].innerHTMLL, text.selectionStart, text.selectionEnd, "end");
+          text.setRangeText(event.childNodes[1].childNodes[3].innerHTML, text.selectionStart, text.selectionEnd, "end");
         }
         if (!upShift[0].classList.contains("none")) {
-          text.setRangeText(event.childNodes[1].childNodes[5].innerHTMLL, text.selectionStart, text.selectionEnd, "end");
+          text.setRangeText(event.childNodes[1].childNodes[5].innerHTML, text.selectionStart, text.selectionEnd, "end");
         }
         if (!UpShiftCaps[0].classList.contains("none")) {
-          text.setRangeText(event.childNodes[1].childNodes[7].innerHTMLL, text.selectionStart, text.selectionEnd, "end");
+          text.setRangeText(event.childNodes[1].childNodes[7].innerHTML, text.selectionStart, text.selectionEnd, "end");
         }
       } else
       if (!ru[0].classList.contains("none")) {
