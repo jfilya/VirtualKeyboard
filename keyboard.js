@@ -90,6 +90,8 @@ if (localStorage.getItem("lang") === "ru") {
 document.onkeydown = (event) => {
   if (event.code === "Delete" || event.code === "Backspace") {
     return true;
+  } if (event.code === "AltRight") {
+    event.preventDefault();
   }
   return false;
 }
