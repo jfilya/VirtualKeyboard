@@ -146,9 +146,6 @@ document.addEventListener("keydown", (event) => {
     }
     localStorage.setItem("lang", lang);
   }
-  if (event.code !== "ControlLeft") {
-    flag = false;
-  }
   const element = (document.querySelector(`.keyboard .btn[data="${event.code}"]`)).getAttribute("data");
   const note = (document.querySelector(`.keyboard .btn[data="${event.code}"]`));
   if (element.includes("Key") || element.includes("Digit") || element.includes("Space") || element.includes("Arrow") || element.includes("Backquote") || element.includes("Minus") || element.includes("Equal") || element.includes("Bracket") || element.includes("Backslash") || element.includes("Semicolon") || element.includes("Quote") || element.includes("Comma") || element.includes("Period") || element.includes("Slash")) {
@@ -211,6 +208,9 @@ document.addEventListener("keyup", (event) => {
         e.classList.toggle("none");
       });
     }
+  }
+  if (event.code === "ControlLeft") {
+    flag = false;
   }
 });
 
