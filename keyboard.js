@@ -104,7 +104,7 @@ document.addEventListener("keydown", (event) => {
     s = false;
     if (document.querySelector(".keyboard .btn[data=\"CapsLock\"]").classList.contains("capsActive")) {
       UpShiftCaps.forEach((e) => {
-        e.classList.toggle("none");
+        e.classList.remove("none");
       });
       upShift.forEach((e) => {
         e.classList.add("none");
@@ -112,12 +112,18 @@ document.addEventListener("keydown", (event) => {
       up.forEach((e) => {
         e.classList.add("none");
       });
+      low.forEach((e) => {
+        e.classList.add("none");
+      });
     } else {
       upShift.forEach((e) => {
-        e.classList.toggle("none");
+        e.classList.add("none");
       });
       low.forEach((e) => {
-        e.classList.toggle("none");
+        e.classList.add("none");
+      });
+      upShift.forEach((e) => {
+        e.classList.remove("none");
       });
     }
   }
@@ -194,7 +200,7 @@ document.addEventListener("keyup", (event) => {
     s = true;
     if (document.querySelector(".keyboard .btn[data=\"CapsLock\"]").classList.contains("capsActive")) {
       UpShiftCaps.forEach((e) => {
-        e.classList.toggle("none");
+        e.classList.add("none");
       });
       upShift.forEach((e) => {
         e.classList.add("none");
