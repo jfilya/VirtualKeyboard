@@ -101,7 +101,11 @@ let element;
 let note;
 document.addEventListener("keydown", (event) => {
   text.focus();
-  document.querySelector(`.keyboard .btn[data="${event.code}"]`).classList.add("active");
+  for (let i = 0; i < KeyboardCode.length; i += 1) {
+    if (event.code === KeyboardCode[i]) {
+      document.querySelector(`.keyboard .btn[data="${event.code}"]`).classList.add("active");
+    }
+  }
   if (event.code === "ShiftLeft" || event.code === "ShiftRight") {
     s = false;
     if (document.querySelector(".keyboard .btn[data=\"CapsLock\"]").classList.contains("capsActive")) {
@@ -156,48 +160,56 @@ document.addEventListener("keydown", (event) => {
     }
     localStorage.setItem("lang", lang);
   }
-  element = (document.querySelector(`.keyboard .btn[data="${event.code}"]`)).getAttribute("data");
-  note = (document.querySelector(`.keyboard .btn[data="${event.code}"]`));
-  if (element.includes("Key") || element.includes("Digit") || element.includes("Space") || element.includes("Arrow") || element.includes("Backquote") || element.includes("Minus") || element.includes("Equal") || element.includes("Bracket") || element.includes("Backslash") || element.includes("Semicolon") || element.includes("Quote") || element.includes("Comma") || element.includes("Period") || element.includes("Slash")) {
-    if (!eng[0].classList.contains("none")) {
-      if (!low[0].classList.contains("none")) {
-        text.setRangeText(note.childNodes[1].childNodes[1].innerHTML, text.selectionStart, text.selectionEnd, "end");
+  for (let i = 0; i < KeyboardCode.length; i += 1) {
+    if (event.code === KeyboardCode[i]) {
+      element = (document.querySelector(`.keyboard .btn[data="${event.code}"]`)).getAttribute("data");
+      note = (document.querySelector(`.keyboard .btn[data="${event.code}"]`));
+      if (element.includes("Key") || element.includes("Digit") || element.includes("Space") || element.includes("Arrow") || element.includes("Backquote") || element.includes("Minus") || element.includes("Equal") || element.includes("Bracket") || element.includes("Backslash") || element.includes("Semicolon") || element.includes("Quote") || element.includes("Comma") || element.includes("Period") || element.includes("Slash")) {
+        if (!eng[0].classList.contains("none")) {
+          if (!low[0].classList.contains("none")) {
+            text.setRangeText(note.childNodes[1].childNodes[1].innerHTML, text.selectionStart, text.selectionEnd, "end");
+          }
+          if (!up[0].classList.contains("none")) {
+            text.setRangeText(note.childNodes[1].childNodes[3].innerHTML, text.selectionStart, text.selectionEnd, "end");
+          }
+          if (!upShift[0].classList.contains("none")) {
+            text.setRangeText(note.childNodes[1].childNodes[5].innerHTML, text.selectionStart, text.selectionEnd, "end");
+          }
+          if (!UpShiftCaps[0].classList.contains("none")) {
+            text.setRangeText(note.childNodes[1].childNodes[7].innerHTML, text.selectionStart, text.selectionEnd, "end");
+          }
+        } else
+        if (!ru[0].classList.contains("none")) {
+          if (!low[0].classList.contains("none")) {
+            text.setRangeText(note.childNodes[3].childNodes[1].innerHTML, text.selectionStart, text.selectionEnd, "end");
+          }
+          if (!up[0].classList.contains("none")) {
+            text.setRangeText(note.childNodes[3].childNodes[3].innerHTML, text.selectionStart, text.selectionEnd, "end");
+          }
+          if (!upShift[0].classList.contains("none")) {
+            text.setRangeText(note.childNodes[3].childNodes[5].innerHTML, text.selectionStart, text.selectionEnd, "end");
+          }
+          if (!UpShiftCaps[0].classList.contains("none")) {
+            text.setRangeText(note.childNodes[3].childNodes[7].innerHTML, text.selectionStart, text.selectionEnd, "end");
+          }
+        }
       }
-      if (!up[0].classList.contains("none")) {
-        text.setRangeText(note.childNodes[1].childNodes[3].innerHTML, text.selectionStart, text.selectionEnd, "end");
+      if (element.includes("Tab")) {
+        text.setRangeText("    ", text.selectionStart, text.selectionEnd, "end");
       }
-      if (!upShift[0].classList.contains("none")) {
-        text.setRangeText(note.childNodes[1].childNodes[5].innerHTML, text.selectionStart, text.selectionEnd, "end");
-      }
-      if (!UpShiftCaps[0].classList.contains("none")) {
-        text.setRangeText(note.childNodes[1].childNodes[7].innerHTML, text.selectionStart, text.selectionEnd, "end");
-      }
-    } else
-    if (!ru[0].classList.contains("none")) {
-      if (!low[0].classList.contains("none")) {
-        text.setRangeText(note.childNodes[3].childNodes[1].innerHTML, text.selectionStart, text.selectionEnd, "end");
-      }
-      if (!up[0].classList.contains("none")) {
-        text.setRangeText(note.childNodes[3].childNodes[3].innerHTML, text.selectionStart, text.selectionEnd, "end");
-      }
-      if (!upShift[0].classList.contains("none")) {
-        text.setRangeText(note.childNodes[3].childNodes[5].innerHTML, text.selectionStart, text.selectionEnd, "end");
-      }
-      if (!UpShiftCaps[0].classList.contains("none")) {
-        text.setRangeText(note.childNodes[3].childNodes[7].innerHTML, text.selectionStart, text.selectionEnd, "end");
+      if (element.includes("Enter")) {
+        text.setRangeText("\n", text.selectionStart, text.selectionEnd, "end");
       }
     }
-  }
-  if (element.includes("Tab")) {
-    text.setRangeText("    ", text.selectionStart, text.selectionEnd, "end");
-  }
-  if (element.includes("Enter")) {
-    text.setRangeText("\n", text.selectionStart, text.selectionEnd, "end");
   }
 });
 
 document.addEventListener("keyup", (event) => {
-  document.querySelector(`.keyboard .btn[data="${event.code}"]`).classList.remove("active");
+  for (let i = 0; i < KeyboardCode.length; i += 1) {
+    if (event.code === KeyboardCode[i]) {
+      document.querySelector(`.keyboard .btn[data="${event.code}"]`).classList.remove("active");
+    }
+  }
   if (event.code === "ShiftLeft" || event.code === "ShiftRight") {
     s = true;
     if (document.querySelector(".keyboard .btn[data=\"CapsLock\"]").classList.contains("capsActive")) {
